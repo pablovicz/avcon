@@ -14,7 +14,7 @@ html, body {
   margin: 0;
   padding:0;
 
-  background-image: none;
+  background-image: url("https://github.com/pablovicz/avcon/blob/main/avcon-webapp/src/assets/background-image.svg");
 }
 
 body, input, button, textarea {
