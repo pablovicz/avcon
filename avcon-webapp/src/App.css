@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Corben&family=Nunito:wght@400;600;700;900&display=swap');
+
+
+:root {
+  --primary-color: #FFCA78;
+  --secondary-color: #5A8CED;
+  --primary-light-color: #FBF5E5;
+  --secondary-light-color: #FAFFFF;
+
+  --third-color: #AFCFD4;
+}
+
+html, body {
+  margin: 0;
+  padding:0;
+
+  background-image: none;
+}
+
+body, input, button, textarea {
+  font-family: 'Nunito', sans-serif;
+  font: 600 18x;
+}
+
+h1 {
+  font-family: 'Corben';
+  font: 40px;
+}
+
+a {
+  text-decoration: none;
+} 

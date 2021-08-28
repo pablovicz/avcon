@@ -1,0 +1,15 @@
+{
+  "short_name": "AVCON",
+  "name": "AVCON Media File Converter",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "60x40 50x30 40x20 20x10",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
