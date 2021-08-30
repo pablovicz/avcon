@@ -15,16 +15,27 @@ function ConvertAnimation(props){
     const [targetImg, setTargetImg] = useState("");
 
     useEffect(() => {
-        
+
         import(`../assets/${mediaType.toLowerCase()}-icons/${origin.toLowerCase()}-icon.svg`)
         .then((image) => setOriginImg(image.default))
         .catch(() => {console.log("erro!")});
 
 
-        import(`../assets/${mediaType.toLowerCase()}-icons/${target.toLowerCase()}-icon.svg`)
+        import(`../assets/${handleMediaType(target)}-icons/${target.toLowerCase()}-icon.svg`)
         .then((image) => setTargetImg(image.default))
         .catch(() => {console.log("erro!")});
     });
+
+    function handleMediaType(extension){
+        const audioList = ["MP3", "WAV", "WMA", "MPEG", "AAC"];
+        const videoList = ["MP4", "WMV", "AVI", "MOV", "MKV"];
+        if(audioList.indexOf(extension) !== -1){
+            return "audio"
+        }
+        if(videoList.indexOf(extension) !== -1){
+            return "video"
+        }
+    }
 
     return (
         <div className="ca-container">

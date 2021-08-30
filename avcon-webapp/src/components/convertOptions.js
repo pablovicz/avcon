@@ -1,12 +1,22 @@
 import "../styles/components/convertOptions.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ConvertOptions(props){
 
-    const {options} = props
+    // eslint-disable-next-line
+    const {options, actualExtension, id} = props
 
-    const [selectedOption, setSelectedOption] = useState(options[0]);
+    const [selectedOption, setSelectedOption] = useState('');
+    var [optionsList, setOptionsList] = useState([]);
+
+    // eslint-disable-next-line
+    useEffect(() => {
+        setOptionsList(options);
+        if(options[0] === '' || options.indexOf(selectedOption) === -1){
+            setSelectedOption(options[0]);
+        }       
+    });
 
     function handleBtnStyle(btnOption){
         const btnState = btnOption === selectedOption ? " active": " disabled";
@@ -22,7 +32,7 @@ function ConvertOptions(props){
     return (
         <div className="convert-op-container">
             {
-                options.map((option) => {
+                optionsList.map((option) => {
                     return (
                         <button 
                             key={option}

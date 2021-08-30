@@ -22,6 +22,8 @@
 
     font-family: 'Nunito';
     font-size: 15px;
+
+    cursor: pointer;
 }
 
 .disabled {
@@ -37,5 +39,6 @@
 .active {
     background-image: linear-gradient(to top, #ffca78, #fdd692, #fbe1ae, #fbebc9, #fbf5e5);
     color: var(--secondary-color);
+    cursor: none;
 }
 

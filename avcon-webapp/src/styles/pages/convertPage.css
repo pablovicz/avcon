@@ -19,11 +19,11 @@
 .text-container { 
 
     display: inline-block;
-    transform: translateY(-15%);
+    transform: translateY(-20%);
 
     background-color: var(--secondary-light-color);
 
-    height: 30%; 
+    height: 20%; 
 }
 
 .text-container h2 {
@@ -45,6 +45,30 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+}
+
+.convert-op-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-pivotate {
+
+    width: 20px;
+    height: 20px;
+
+    background-color: var(--secondary-light-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    border:none;
+}
+
+.btn-pivotate:hover {
+    color: var(--secondary-color);
+    transform: rotate(180deg);
+    transition: linear 250ms;
 }
 
 .btn-convert{ 

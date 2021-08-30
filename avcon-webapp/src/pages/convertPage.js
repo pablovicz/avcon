@@ -5,12 +5,16 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 // eslint-disable-next-line
 import ReactLoading from "react-loading";
-import {HiOutlineDownload} from "react-icons/hi"
+import {HiOutlineDownload} from "react-icons/hi";
+import {CgArrowsExchangeV} from "react-icons/cg";
 
 import ConvertAnimation from "../components/convertAnimation.js";
 import ConvertOptions from "../components/convertOptions.js";
 
 function ConvertPage(props) {
+
+  const file = props.file;
+  const history = useHistory();
 
   // eslint-disable-next-line
   const [isAbleToLoad, setIsAbleToLoad] = useState(false);
@@ -19,10 +23,9 @@ function ConvertPage(props) {
   // eslint-disable-next-line
   var [videoOptions, setVideoOptions] = useState(["MP4", "WMV", "AVI", "MOV", "MKV"]);
   // eslint-disable-next-line
-  const [targetExtension, setTargetExtension] = useState('');
-
-  const file = props.file;
-  const history = useHistory();
+  const [isAudioMedia, setIsAudioMedia] = useState(true);
+  const [targetExtension, setTargetExtension] = useState(handleFirstTargetValue());
+  const [loadCounter, setLoadCounter] = useState(0);
 
   // eslint-disable-next-line
   useEffect(() => {
@@ -30,28 +33,72 @@ function ConvertPage(props) {
       toast.error("Impossible get the inserted file. Please insert again :)");
       history.push("/");
     }
-    handleAvailableOptions()
+    handleMediaTypeShuffle();
+    //handleAvailableOptions();
     setIsAbleToLoad(true);
   });
 
-  function handleAvailableOptions(){
-    if(file.mediaType === 'audio'){
-      delete audioOptions[audioOptions.indexOf(file.extension)];
-      setTargetExtension(audioOptions[0]);
+  function handleOptions(optionsList){
+    const currentExtension = file.extension.toUpperCase();
+    if(optionsList.indexOf(currentExtension) !== -1){
+      return optionsList.filter((e) => {return e !== currentExtension})
+    } else {
+      return optionsList.slice(0,4)
+    }  
+  }
+
+  function handleFirstTargetValue(){
+    var audioList = ["MP3", "WAV", "WMA", "MPEG", "AAC"];
+    var videoList = ["MP4", "WMV", "AVI", "MOV", "MKV"];
+    const currentExtension = file.extension.toUpperCase();
+    if(audioList.indexOf(currentExtension) !== -1){
+      console.log('entrouuu')
+      const audioListResult = audioList.filter((e) => {return e !== currentExtension})
+      return audioListResult[0]
     }
-    if(file.mediaType === 'video'){
-      delete videoOptions[videoOptions.indexOf(file.extension)];
-      setTargetExtension(videoOptions[0]);
-      audioOptions.splice(4,5);
+    if(videoList.indexOf(currentExtension) !== -1) {
+      const videoListResult = videoList.filter((e) => {return e !== currentExtension})
+      return videoListResult[0]
     }
+  }
+
+  function handleUpdateTargetValue(){
+    var audioList = ["MP3", "WAV", "WMA", "MPEG", "AAC"];
+    var videoList = ["MP4", "WMV", "AVI", "MOV", "MKV"];
+    const currentExtension = targetExtension.toUpperCase();
+
+    const isAudio = audioList.indexOf(currentExtension) === -1 || videoList.indexOf(currentExtension) !== -1;
+    const isVideo = videoList.indexOf(currentExtension) === -1 || audioList.indexOf(currentExtension) !== -1;
+
+    if(isAudio){
+      console.log('entrouuu')
+      const audioListResult = audioList.filter((e) => {return e !== currentExtension})
+      return audioListResult[0]
+    }
+    if(isVideo) {
+      const videoListResult = videoList.filter((e) => {return e !== currentExtension})
+      return videoListResult[0]
+    }
+  }
+
+  function handleMediaTypeShuffle(){
+    if(file.mediaType === 'video' && loadCounter === 0){
+      setIsAudioMedia(false);
+    }
+    
   }
 
   // eslint-disable-next-line
-  async function handleFileExtesionCallback(option) {
+  function handleFileExtesionCallback(option) {
     setTargetExtension(option);
   }
 
-
+  function handlePivotateClick(){
+    setIsAudioMedia(!isAudioMedia);
+    setLoadCounter(loadCounter + 1)
+    const newOptionsList = handleUpdateTargetValue()
+    setTargetExtension(newOptionsList);
+  }
 
   return (
     <div id="convert-page">
@@ -60,7 +107,24 @@ function ConvertPage(props) {
       </div>
       <div className="options-container">
         <div className="convert-op-container">
-          <ConvertOptions parentCallback={handleFileExtesionCallback} options={audioOptions}/>
+          {isAudioMedia ? (
+            <ConvertOptions 
+              parentCallback={handleFileExtesionCallback} 
+              options={handleOptions(audioOptions)}
+            />
+          ) : (
+            <ConvertOptions 
+              parentCallback={handleFileExtesionCallback} 
+              options={handleOptions(videoOptions)}
+            />
+          )}
+          {file.mediaType === "video" ? (
+            <button type="button" className="btn-pivotate" onClick={()=>handlePivotateClick()}>
+              <CgArrowsExchangeV size={25} />
+            </button>
+          ) : (
+          <></>
+          )}
         </div>
         <ConvertAnimation
           origin={file.extension}
