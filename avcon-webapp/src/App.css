@@ -1,32 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Corben&family=Nunito:wght@400;600;700;900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Corben&family=Nunito:wght@400;600;700;900&display=swap");
 
 :root {
-  --primary-color: #FFCA78;
-  --secondary-color: #5A8CED;
-  --primary-light-color: #FBF5E5;
-  --secondary-light-color: #FAFFFF;
+  --primary-color: #ffca78;
+  --secondary-color: #5a8ced;
+  --primary-light-color: #fbf5e5;
+  --secondary-light-color: #faffff;
 
-  --third-color: #AFCFD4;
+  --third-color: #afcfd4;
 }
 
-html, body {
+html,
+body {
   margin: 0;
-  padding:0;
+  padding: 0;
 
-  background-image: url("https://github.com/pablovicz/avcon/blob/main/avcon-webapp/src/assets/background-image.svg");
+  background: var(--secondary-light-color);
 }
 
-body, input, button, textarea {
-  font-family: 'Nunito', sans-serif;
+body,
+input,
+button,
+textarea {
+  font-family: "Nunito", sans-serif;
   font: 600 18x;
 }
 
 h1 {
-  font-family: 'Corben';
+  font-family: "Corben";
   font: 40px;
 }
 
 a {
   text-decoration: none;
-} 
+}
+
+.pages-container {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 60vw;
+  height: calc(100vh - 60px);
+
+  border: 1px solid var(--third-color);
+  border-radius: 10px;
+}
+
+.pages-content {
+  width: 90%;
+  height: calc(100% - 200px);
+
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.toast {
+  margin-top: 110px;
+  border-radius: 10px;
+}
+
+.sub-title {
+  color: var(--primary-color);
+
+  margin-top: 75px;
+  margin-bottom: 75px;
+
+  font-family: 'Nunito';
+  font-weight: 700;
+  font-size: 30px;
+}

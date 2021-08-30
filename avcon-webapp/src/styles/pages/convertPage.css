@@ -1,0 +1,82 @@
+#convert-page {
+
+    width: 40vw;
+    height: calc(100vh - 400px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 50px;
+
+    border: 2px solid var(--third-color);
+    border-radius: 10px;
+
+    color: var(--third-color);
+}
+
+.text-container { 
+
+    display: inline-block;
+    transform: translateY(-15%);
+
+    background-color: var(--secondary-light-color);
+
+    height: 30%; 
+}
+
+.text-container h2 {
+
+    margin-left: 15px;
+    margin-right: 15px;
+
+    font-family: 'Nunito';
+    font-size: 22px;
+}
+
+
+.options-container { 
+    height: 70%;
+
+    margin-bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-convert{ 
+
+    width: 150px; 
+    height: 50px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: var(--primary-light-color);
+
+    font-family: 'Nunito';
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.btn-convert:hover { 
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+
+    transition: linear 250ms;
+}
+
+.btn-icon {
+    margin-right: 10px;
+}

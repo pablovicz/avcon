@@ -1,0 +1,41 @@
+.convert-op-container {
+    width: 280px;
+    height: 40px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.op-btn {
+    width: 70px;
+    height: 40px;
+
+    align-items: center;
+
+    color: var(--third-color);
+    background-color: var(--primary-light-color);
+    border: none;
+    border-radius: 10px 10px 0px 0px;
+
+    font-family: 'Nunito';
+    font-size: 15px;
+}
+
+.disabled {
+    background-color: var(--secondary-light-color);
+}
+
+.disabled:hover {
+    background-image: linear-gradient(to top, #f1f6ff, #f1f9ff, #f3fbff, #f6fdff, #faffff);
+    border-bottom: 2.5px solid var(--third-color);
+    transition: linear 150ms;
+}
+
+.active {
+    background-image: linear-gradient(to top, #ffca78, #fdd692, #fbe1ae, #fbebc9, #fbf5e5);
+    color: var(--secondary-color);
+}
+

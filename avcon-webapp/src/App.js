@@ -1,9 +1,15 @@
-import './App.css';
+import "./App.css";
+import "./styles/global.css";
+
+import Routes from "./router.js";
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>AVCON</h1>
+    <div className="pages-container">
+      <Routes />
     </div>
   );
 }
