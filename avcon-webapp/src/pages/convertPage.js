@@ -19,7 +19,7 @@ function ConvertPage(props) {
   // eslint-disable-next-line
   const [isAbleToLoad, setIsAbleToLoad] = useState(false);
   // eslint-disable-next-line
-  var [audioOptions, setAudioOptions] = useState(["MP3", "WAV", "WMA", "MPEG", "AAC"]);
+  var [audioOptions, setAudioOptions] = useState(["MP3", "WAV", "OGG", "FLAC", "AC3"]);
   // eslint-disable-next-line
   var [videoOptions, setVideoOptions] = useState(["MP4", "WMV", "AVI", "MOV", "MKV"]);
   // eslint-disable-next-line
@@ -48,7 +48,7 @@ function ConvertPage(props) {
   }
 
   function handleFirstTargetValue(){
-    var audioList = ["MP3", "WAV", "WMA", "MPEG", "AAC"];
+    var audioList = ["MP3", "WAV", "OGG", "FLAC", "AC3"];
     var videoList = ["MP4", "WMV", "AVI", "MOV", "MKV"];
     const currentExtension = file.extension.toUpperCase();
     if(audioList.indexOf(currentExtension) !== -1){
@@ -62,7 +62,7 @@ function ConvertPage(props) {
   }
 
   function handleUpdateTargetValue(){
-    var audioList = ["MP3", "WAV", "WMA", "MPEG", "AAC"];
+    var audioList = ["MP3", "WAV", "OGG", "FLAC", "AC3"];
     var videoList = ["MP4", "WMV", "AVI", "MOV", "MKV"];
     const currentExtension = targetExtension.toUpperCase();
 

@@ -27,7 +27,7 @@ function ConvertAnimation(props){
     });
 
     function handleMediaType(extension){
-        const audioList = ["MP3", "WAV", "WMA", "MPEG", "AAC"];
+        const audioList = ["MP3", "WAV", "OGG", "FLAC", "AC3"];
         const videoList = ["MP4", "WMV", "AVI", "MOV", "MKV"];
         if(audioList.indexOf(extension) !== -1){
             return "audio"
