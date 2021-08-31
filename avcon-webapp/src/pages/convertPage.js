@@ -52,7 +52,6 @@ function ConvertPage(props) {
     var videoList = ["MP4", "WMV", "AVI", "MOV", "MKV"];
     const currentExtension = file.extension.toUpperCase();
     if(audioList.indexOf(currentExtension) !== -1){
-      console.log('entrouuu')
       const audioListResult = audioList.filter((e) => {return e !== currentExtension})
       return audioListResult[0]
     }
@@ -71,7 +70,6 @@ function ConvertPage(props) {
     const isVideo = videoList.indexOf(currentExtension) === -1 || audioList.indexOf(currentExtension) !== -1;
 
     if(isAudio){
-      console.log('entrouuu')
       const audioListResult = audioList.filter((e) => {return e !== currentExtension})
       return audioListResult[0]
     }
