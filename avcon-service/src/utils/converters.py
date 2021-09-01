@@ -1,4 +1,4 @@
-import src.utils.utils as ut
+import src.utils.application_utils as ut
 from src.utils.ffmpeg_utils import FfmpegCommandBuilder
 
 from pydub import AudioSegment

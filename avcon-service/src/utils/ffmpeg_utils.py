@@ -1,4 +1,4 @@
-import src.utils.utils as ut
+import src.utils.application_utils as ut
 
 
 class FfmpegCommandBuilder:
