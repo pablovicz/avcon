@@ -25,7 +25,7 @@ function ConvertAnimation(props){
         .then((image) => setTargetImg(image.default))
         .catch(() => {console.log("erro!")});
     });
-
+    
     function handleMediaType(extension){
         const audioList = ["MP3", "WAV", "OGG", "FLAC", "AC3"];
         const videoList = ["MP4", "WMV", "AVI", "MOV", "MKV"];

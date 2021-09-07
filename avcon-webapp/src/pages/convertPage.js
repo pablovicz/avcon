@@ -14,7 +14,11 @@ import ConvertOptions from "../components/convertOptions.js";
 function ConvertPage(props) {
 
   const file = props.file;
+
+  const currentExtension = file.extension;
+
   const history = useHistory();
+  
 
   // eslint-disable-next-line
   const [isAbleToLoad, setIsAbleToLoad] = useState(false);
@@ -34,12 +38,10 @@ function ConvertPage(props) {
       history.push("/");
     }
     handleMediaTypeShuffle();
-    //handleAvailableOptions();
     setIsAbleToLoad(true);
   });
 
   function handleOptions(optionsList){
-    const currentExtension = file.extension.toUpperCase();
     if(optionsList.indexOf(currentExtension) !== -1){
       return optionsList.filter((e) => {return e !== currentExtension})
     } else {
@@ -50,7 +52,7 @@ function ConvertPage(props) {
   function handleFirstTargetValue(){
     var audioList = ["MP3", "WAV", "OGG", "FLAC", "AC3"];
     var videoList = ["MP4", "WMV", "AVI", "MOV", "MKV"];
-    const currentExtension = file.extension.toUpperCase();
+    
     if(audioList.indexOf(currentExtension) !== -1){
       const audioListResult = audioList.filter((e) => {return e !== currentExtension})
       return audioListResult[0]
@@ -64,8 +66,7 @@ function ConvertPage(props) {
   function handleUpdateTargetValue(){
     var audioList = ["MP3", "WAV", "OGG", "FLAC", "AC3"];
     var videoList = ["MP4", "WMV", "AVI", "MOV", "MKV"];
-    const currentExtension = targetExtension.toUpperCase();
-
+    
     const isAudio = audioList.indexOf(currentExtension) === -1 || videoList.indexOf(currentExtension) !== -1;
     const isVideo = videoList.indexOf(currentExtension) === -1 || audioList.indexOf(currentExtension) !== -1;
 
@@ -83,10 +84,8 @@ function ConvertPage(props) {
     if(file.mediaType === 'video' && loadCounter === 0){
       setIsAudioMedia(false);
     }
-    
   }
 
-  // eslint-disable-next-line
   function handleFileExtesionCallback(option) {
     setTargetExtension(option);
   }
@@ -125,7 +124,7 @@ function ConvertPage(props) {
           )}
         </div>
         <ConvertAnimation
-          origin={file.extension}
+          origin={currentExtension}
           target={targetExtension}
           mediaType={file.mediaType}
           isConverting={false}

@@ -1,10 +1,11 @@
-function DataTransferToFile(dataTransfer){
-
-    const mediaType = dataTransfer.type.split("/")[0];
-    const extension = dataTransfer.type.split("/")[1];
-    const file = dataTransfer.getAsFile();
-    const data = {"mediaType":mediaType, "extension":extension, "file":file}
-    return data
+function DataTransferToFile(inputFile) {
+  const data = {
+    name: inputFile.name,
+    mediaType: inputFile.type.split("/")[0],
+    extension: inputFile.name.split(".").at(-1).toUpperCase(),
+    file: inputFile,
+  };
+  return data;
 }
 
 export default DataTransferToFile;

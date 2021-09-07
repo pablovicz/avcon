@@ -14,7 +14,9 @@ body {
   margin: 0;
   padding: 0;
 
-  background: var(--secondary-light-color);
+  background: url('./assets/background-image.png');
+  background-size: 97% 150%;
+  background-repeat: no-repeat;
 }
 
 body,
@@ -44,11 +46,13 @@ a {
 
   border: 1px solid var(--third-color);
   border-radius: 10px;
+
+  background: var(--secondary-light-color);
 }
 
 .pages-content {
   width: 90%;
-  height: calc(100% - 200px);
+  height: calc(100% - 125px);
 
   margin-left: auto;
   margin-right: auto;
@@ -67,8 +71,8 @@ a {
 .sub-title {
   color: var(--primary-color);
 
-  margin-top: 75px;
-  margin-bottom: 75px;
+  margin-top: 30px;
+  margin-bottom: 45px;
 
   font-family: 'Nunito';
   font-weight: 700;

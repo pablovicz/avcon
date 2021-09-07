@@ -10,9 +10,24 @@ import DataTransferToFile from  "../utils/DataTransferToFile.js";
 function DragClickInput(props) {
   const [dragging, setDragging] = useState(false);
 
-  const handleClick = (e) => {
-    console.log("clicou!!!");
+  const allowedExtensions = ["MP3", "WAV", "OGG", "FLAC", "AC3", "MP4", "WMV", "AVI", "MOV", "MKV"];
+
+  function handleClick(e) {
+    var input = document.getElementById("file-input");
+    input.click();
+    input.onChange = function(e) {
+      handleSelectedFile(e);
+    }
   };
+
+  function handleSelectedFile(e) {
+    if (!e.target.files) {
+      return;
+    }
+    const files = e.target.files;
+    const data = DataTransferToFile(files[0]);
+    handleFileUpload(data);
+  }
 
   function handleDrag(e) {
     e.preventDefault();
@@ -35,12 +50,16 @@ function DragClickInput(props) {
     e.stopPropagation();
     setDragging(false);
     if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
-      const data = DataTransferToFile(e.dataTransfer.items[0]);
-      if (["video", "audio"].includes(data.mediaType)) {
-        props.parentCallback(data);
-      } else {
-        toast.error("Invalid file type inserted! Please insert a media file.");
-      }
+      const data = DataTransferToFile(e.dataTransfer.items[0].getAsFile());
+      handleFileUpload(data);
+    }
+  }
+
+  function handleFileUpload(data) {
+    if (["video", "audio"].includes(data.mediaType) && allowedExtensions.includes(data.file.name.split(".").at(-1).toUpperCase())) {
+      props.parentCallback(data);
+    } else {
+      toast.error("Invalid file type inserted! Please insert a media file.");
     }
   }
 
@@ -55,6 +74,13 @@ function DragClickInput(props) {
     >
       <p>Insert or drag you file here</p>
       <AiFillFileAdd size={30} />
+      <input 
+        id="file-input" 
+        type="file" 
+        name="file-input"  
+        onChange={(e) => handleSelectedFile(e)} 
+        hidden 
+      />
     </div>
   );
 }
