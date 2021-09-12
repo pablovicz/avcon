@@ -1,4 +1,4 @@
-function DataTransferToFile(inputFile) {
+function FileToData(inputFile) {
   const data = {
     name: inputFile.name,
     mediaType: inputFile.type.split("/")[0],
@@ -8,4 +8,4 @@ function DataTransferToFile(inputFile) {
   return data;
 }
 
-export default DataTransferToFile;
+export default FileToData;

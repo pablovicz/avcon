@@ -2,7 +2,7 @@ from src.controllers.convert_controller import ConvertController
 import src.utils.application_utils as ut
 
 from flask import Flask, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 

@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+ALLOWED_EXTENSIONS = {"MP3", "WAV", "OGG", "FLAC", "AC3", "MP4", "MPEG", "FLV", "AVI", "MOV", "MKV"}
+
 
 def get_ffmpeg_path():
     ffmpeg = find_ffmpeg_in_system("ffmpeg")

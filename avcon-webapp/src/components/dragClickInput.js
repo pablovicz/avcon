@@ -5,7 +5,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 
-import DataTransferToFile from  "../utils/DataTransferToFile.js";
+import FileToData from  "../utils/FileToData.js";
 
 function DragClickInput(props) {
   const [dragging, setDragging] = useState(false);
@@ -25,7 +25,7 @@ function DragClickInput(props) {
       return;
     }
     const files = e.target.files;
-    const data = DataTransferToFile(files[0]);
+    const data = FileToData(files[0]);
     handleFileUpload(data);
   }
 
@@ -50,7 +50,7 @@ function DragClickInput(props) {
     e.stopPropagation();
     setDragging(false);
     if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
-      const data = DataTransferToFile(e.dataTransfer.items[0].getAsFile());
+      const data = FileToData(e.dataTransfer.items[0].getAsFile());
       handleFileUpload(data);
     }
   }

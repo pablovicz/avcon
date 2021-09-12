@@ -13,13 +13,11 @@ class AudioMediaConverter:
         AudioSegment.converter = ffmpeg_dir
         AudioSegment.ffmpeg = ffmpeg_dir
         AudioSegment.ffprobe = ffmpeg_dir
-        # audioList = ["MP3", "WAV", "OGG", "FLAC", "AC3"]
-        # videoList = ["MP4", "MPEG", "FLV", "AVI", "MOV", "MKV"]
         self.__source_ext = source.lower()
         self.__target_ext = target.lower()
         self.__source_full_path = ut.get_file_path(f'source.{self.__source_ext}')
         self.__target_full_path = ut.get_file_path(f'converted.{self.__target_ext}')
-        self.__source_is_supported = self.__source_ext.upper() in ["MP4", "MPEG", "MP3", "WAV", "OGG", "FLAC", "AC3"]
+        self.__source_is_supported = self.__source_ext.upper() in list(ut.ALLOWED_EXTENSIONS)
         self.__target_is_supported = self.__target_ext.upper() in ["MP3", "WAV", "OGG", "FLAC", "AC3"]
 
     def convert(self):

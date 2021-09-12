@@ -5,11 +5,8 @@ from flask import make_response
 from werkzeug.utils import secure_filename
 import base64
 import shutil
-import codecs
 import time
 import os
-
-ALLOWED_EXTENSIONS = {"MP3", "WAV", "OGG", "FLAC", "AC3", "MP4", "MPEG", "FLV", "AVI", "MOV", "MKV"}
 
 
 class ConvertController:
@@ -18,8 +15,10 @@ class ConvertController:
         self.__media_type = request.form.get("media_type")
         self.__source = request.form.get("source")
         self.__target = request.form.get("target")
+
         self.__file = request.files['file']
-        self.__filename = secure_filename(self.__file.filename)
+        self.__original_filename = request.form.get("filename")
+        self.__filename = secure_filename(self.__original_filename)
         self.__source_full_path = f'{ut.get_file_path("source")}.{self.__source}'
         self.__converted_full_path = f'{ut.get_file_path("converted")}.{self.__target}'
         self.__create_temp_path()
@@ -43,15 +42,19 @@ class ConvertController:
             response.headers.add('Access-Control-Allow-Origin', '*')
             response.headers.set('Content-Type', f'application/octet-stream')
             response.headers['filename'] = f'{self.__filename.split(".")[0]}.{self.__target}'
-            response.data = codecs.open(self.__converted_full_path, 'rb').read()
+            response.data = self.__codec_file()
         self.__clean_temp_path()
         return response
 
     def __download_request_file(self):
-        if self.__file and self.__allowed_file(self.__file.filename):
+        if self.__file and self.__allowed_file(self.__original_filename):
             self.__file.save(self.__source_full_path)
             while not os.path.exists(self.__source_full_path):
                 time.sleep(0.5)
+
+    def __codec_file(self):
+        with open(self.__converted_full_path, 'rb') as fh:
+            return base64.b64encode(fh.read())
 
     @staticmethod
     def __create_temp_path():
@@ -64,4 +67,4 @@ class ConvertController:
 
     @staticmethod
     def __allowed_file(filename):
-        return '.' in filename and filename.rsplit('.', 1)[1].upper() in ALLOWED_EXTENSIONS
+        return '.' in filename and filename.rsplit('.', 1)[1].upper() in ut.ALLOWED_EXTENSIONS
