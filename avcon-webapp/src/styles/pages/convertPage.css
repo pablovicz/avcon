@@ -1,7 +1,8 @@
 #convert-page {
 
     width: 40vw;
-    height: calc(100vh - 325px);
+    /* height: calc(100vh - 325px); */
+    height: 50vh;
 
     display: flex;
     flex-direction: column;
