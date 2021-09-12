@@ -16,7 +16,12 @@ function Header() {
           <h1 className="av">AV</h1>
           <h1>CON</h1>
         </div>
-        <a href="https://github.com/" className="more" target="_blank" rel="noopener noreferrer">
+        <a 
+          href="https://baixatube.netlify.app/" 
+          className="more" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
           <MoreVertIcon fontSize="large" />
         </a>
       </div>

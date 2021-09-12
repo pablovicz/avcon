@@ -1,18 +1,24 @@
 import defaultIcon from "../assets/undefined-media-icon.svg";
+import cancelIcon from "../assets/cancel-media-icon.svg";
 
 import "../styles/components/convertAnimation.css";
 
+import { toast } from "react-toastify";
 import {useState, useEffect} from "react"; 
 import {FaLongArrowAltRight} from "react-icons/fa"
+import ReactLoading from 'react-loading';
+import { useHistory } from "react-router";
 
 
 function ConvertAnimation(props){
 
-    // eslint-disable-next-line
-    const {origin, target, mediaType, isConverting} = props
+    const {origin, target, mediaType, isConverting, filename} = props
+
+    const history = useHistory();
 
     const [originImg, setOriginImg] = useState("");
     const [targetImg, setTargetImg] = useState("");
+    const [hover, setHover] = useState(false);
 
     useEffect(() => {
 
@@ -37,11 +43,51 @@ function ConvertAnimation(props){
         }
     }
 
+    function onMouseEnterHandler(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        setHover(true);
+    }
+
+    function onMouseLeaveHandler(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        setHover(false);
+    }
+
+    function handleCancel() {
+        history.push('/');
+        toast.warning('Cancelled operation!')
+    }
+
+
     return (
         <div className="ca-container">
-            <img alt="origin" src={originImg !== "" ? originImg : defaultIcon} />
-            <FaLongArrowAltRight className="convert-arrow"/>
-            <img alt="target" src={targetImg !== "" ? targetImg : defaultIcon} />
+            <div 
+                className="image-container" 
+                onMouseEnter={(e) => onMouseEnterHandler(e)}
+                onMouseLeave={(e) => onMouseLeaveHandler(e)}
+                onClick={() => handleCancel()}
+            >
+                {!hover ? (
+                    <img alt={filename} src={originImg !== "" ? originImg : defaultIcon} />
+                ) : (
+                    <>
+                    <img alt={filename} src={cancelIcon} />
+                    <p className="filename">{filename}</p>
+                    </>
+                )}
+            </div>
+            <div className='convert-symbol'>
+            {isConverting ? (
+                <ReactLoading type='bars' color='#5a8ced' height={40} width={40} className='loading-animation'/>
+            ) : (
+                <FaLongArrowAltRight className='convert-arrow'/>
+            )}
+            </div>
+            <div className="image-container">
+                <img alt="target" src={targetImg !== "" ? targetImg : defaultIcon} />
+            </div>
         </div>
     );
 }

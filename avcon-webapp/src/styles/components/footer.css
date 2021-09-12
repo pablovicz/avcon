@@ -19,6 +19,25 @@
     color: var(--third-color);
 }
 
+.btn-back {
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--third-color);
+    color: var(--secondary-light-color);
+
+    border-radius: 50%;
+}
+
+.btn-back:hover{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    transition: linear 250ms;
+}
+
 .github-icon {
     cursor: pointer;
     color: var(--third-color);

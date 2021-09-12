@@ -5,9 +5,6 @@
     box-sizing: border-box;
 }
 
-body{
-}
-
 body, input, button, textarea {
     font-family: 'Nunito', sans-serif;
     font: 600 18x;

@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 function Landing(props){
 
     const history = useHistory();
+    
     const [loading, setLoading] = useState(false);
 
 
@@ -20,8 +21,6 @@ function Landing(props){
         setTimeout(() => {
             history.push('/convert');
         }, 100);
-
-        //console.log(file);
     }
 
     return (

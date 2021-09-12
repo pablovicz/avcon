@@ -15,10 +15,10 @@ class ConvertController:
         self.__media_type = request.form.get("media_type")
         self.__source = request.form.get("source")
         self.__target = request.form.get("target")
-
         self.__file = request.files['file']
         self.__original_filename = request.form.get("filename")
         self.__filename = secure_filename(self.__original_filename)
+        #print(f'{self.__original_filename} ({self.__media_type}): {self.__source} -> {self.__target}')
         self.__source_full_path = f'{ut.get_file_path("source")}.{self.__source}'
         self.__converted_full_path = f'{ut.get_file_path("converted")}.{self.__target}'
         self.__create_temp_path()
@@ -32,7 +32,7 @@ class ConvertController:
             AudioMediaConverter(self.__source, self.__target).convert()
         if self.__media_type == 'video' and self.__target.upper() in ["MP3", "WAV", "OGG", "FLAC", "AC3"]:
             AudioMediaConverter(self.__source, self.__target).convert()
-        if self.__media_type == 'video' and self.__target.upper() in ["MP4", "MPEG", "FLV", "AVI", "MOV", "MKV"]:
+        if self.__media_type == 'video' and self.__target.upper() in ["MP4", "MPEG", "FLV", "AVI", "MOV", "MKV", "WMV"]:
             VideoMediaConverter(self.__source, self.__target).convert()
 
     def get_response(self):

@@ -3,8 +3,6 @@ import "../styles/pages/convertPage.css";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-// eslint-disable-next-line
-import ReactLoading from "react-loading";
 import {HiOutlineDownload} from "react-icons/hi";
 import {CgArrowsExchangeV} from "react-icons/cg";
 
@@ -30,13 +28,13 @@ function ConvertPage(props) {
   const [isAudioMedia, setIsAudioMedia] = useState(true);
   const [targetExtension, setTargetExtension] = useState(handleFirstTargetValue());
   const [loadCounter, setLoadCounter] = useState(0);
+  const [isConverting, setIsConverting] = useState(false);
 
   useEffect(() => {
     if (file == null) {
       toast.error("Impossible get the inserted file. Please insert again :)");
       history.push("/");
     }
-    //handleMediaTypeShuffle();
     if(file.mediaType === 'video' && loadCounter === 0){
       setIsAudioMedia(false);
     }
@@ -84,12 +82,6 @@ function ConvertPage(props) {
     }
   }
 
-  // function handleMediaTypeShuffle(){
-  //   if(file.mediaType === 'video' && loadCounter === 0){
-  //     setIsAudioMedia(false);
-  //   }
-  // }
-
   function handleFileExtesionCallback(option) {
     setTargetExtension(option);
   }
@@ -103,23 +95,28 @@ function ConvertPage(props) {
 
   async function handleSubmit(){
 
-    const data = new FormData();
+    setIsConverting(true);
 
+    const data = new FormData();
     data.append('media_type', file.mediaType);
     data.append('source', currentExtension);
     data.append('target', targetExtension);
     data.append('filename', file.name)
     data.append('file', file.file);
 
+    const convertedName = file.name.split(".")[0].concat(`.${targetExtension.toLowerCase()}`)
+
     await api
       .post('/convert', data)
       .then(response => {
-        browserFileDownloader(response, file.name.split(".")[0].concat(`.${targetExtension}`));
-        toast.success('Arquivo convertido com sucesso!');
+        browserFileDownloader(response, convertedName);
+        setIsConverting(false);
+        toast.success('Successfully converted file!');
         history.push('/')
       })
-      .catch(error => {
-        toast.error("Erro ao converter arquivo!");
+      .catch(() => {
+        setIsConverting(false);
+        toast.error("Error while file conversion!");
       });
     }
   
@@ -151,12 +148,17 @@ function ConvertPage(props) {
           )}
         </div>
         <ConvertAnimation
+          filename={file.name}
           origin={currentExtension}
           target={targetExtension}
           mediaType={file.mediaType}
-          isConverting={false}
+          isConverting={isConverting}
         />
-        <button type="button" className="btn-convert" onClick={() => handleSubmit()}>
+        <button 
+          type="button" 
+          className={`btn-convert ${isConverting ? 'cv-disabled' : ''}`}
+          onClick={() => handleSubmit()}
+        >
           <HiOutlineDownload className="btn-icon" size={30}/>
           <h3>Convert</h3>
         </button>

@@ -22,7 +22,7 @@ class AudioMediaConverter:
 
     def convert(self):
         if self.__source_is_supported and self.__target_is_supported:
-            print(f'FROM: {self.__source_ext.upper()} | TO: {self.__target_ext}')
+            # print(f'FROM: {self.__source_ext.upper()} | TO: {self.__target_ext}')
             song = AudioSegment.from_file(file=self.__source_full_path, format=self.__source_ext)
             song.export(self.__target_full_path, format=self.__target_ext)
             while not os.path.exists(self.__target_full_path):

@@ -1,12 +1,55 @@
 .ca-container { 
 
-    width: 250px;
+    width: 220px;
     height: 125px;
 
     display: flex;
     flex-direction: row;
 
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image-container {
+    width: 60px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
     justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.filename {
+    display: none;
+
+    margin-top: 5px;
+
+    display: none;
+
+    text-align: center;
+
+    font-size: 12px;
+    font-family: 'Nunito';
+    color: var(--third-color);
+}
+
+.image-container:hover .filename{
+    display:block;
+}
+
+
+
+.convert-symbol {
+    width: 60px;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+
     align-items: center;
 }
 
@@ -17,6 +60,9 @@
 
     color: var(--secondary-color);
 
-    margin-left: 15px;
-    margin-right: 15px;
+}
+
+.loading-animation {
+
+    color: var(--primary-color);
 }
